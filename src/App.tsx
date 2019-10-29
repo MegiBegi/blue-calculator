@@ -1,11 +1,10 @@
 import React, { ReactElement } from 'react'
-import styled from 'styled-components'
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 const GlobalStyles = createGlobalStyle`
   body {
     @import url('https://fonts.googleapis.com/css?family=Nothing+You+Could+Do&display=swap');
-font-family: 'Nothing You Could Do', cursive;
+    font-family: 'Nothing You Could Do', cursive;
   }
 `
 
