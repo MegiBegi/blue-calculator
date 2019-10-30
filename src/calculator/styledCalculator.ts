@@ -5,6 +5,7 @@ export const StyledCalculator = styled.div`
   height: 506px;
   border-radius: 10px;
   background-color: #0095b8;
+  padding: 0;
 `
 
 export const ScoreInput = styled.input`
@@ -13,13 +14,12 @@ export const ScoreInput = styled.input`
   border-radius: 10px;
   background-color: #ffffff;
   margin-top: 30px;
-  margin-left: 25px;
-  margin-right: 25px;
-  padding: 0;
   font-size: 36px;
   font-family: 'Nothing You Could Do';
   text-indent: 20px;
   line-height: 63px;
+  margin-left: 25px;
+  margin-right: 26px;
 `
 
 export const PageContainer = styled.div`
@@ -29,4 +29,14 @@ export const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #fff;
+`
+export const AllButtons = styled.div`
+  height: 329px;
+  width: 270px;
+  padding-left: 28px;
+  padding-right: 2px;
+  padding-bottom: 38px;
+  padding-top: 42px;
+  display: flex;
+  justify-content: space-around;
 `

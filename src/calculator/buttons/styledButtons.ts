@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 interface ButtonProps {
   name: string
-  id: number
+  sign: number
 }
 
 const StyledButton = styled.button<ButtonProps>`
@@ -15,8 +15,8 @@ const StyledButton = styled.button<ButtonProps>`
   width: 64px;
   line-height: 64px;
   border-radius: 50%;
-  padding: 0;
-  margin: ${(props) => (props.id === 1 ? '20px' : '10px')};
+  margin-bottom: 24.3px;
+  margin-right: 26px;
 `
 
 export default StyledButton

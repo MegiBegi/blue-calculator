@@ -1,5 +1,10 @@
-import React from 'react'
+import React, { ReactElement, FC } from 'react'
 import Button from './styledButtons'
+
+interface Button {
+  name: string
+  id: number
+}
 
 const names = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '+', '0', '=']
 
@@ -10,12 +15,26 @@ export const buttonsList = names.map((name, index) => {
   }
 })
 
-const fullList = buttonsList.map((name, id) => {
-  return (
-    <Button name={name} id={id}>
-      dsdsd
-    </Button>
+const FullList: FC = () => {
+  const buttonsTab = buttonsList.map(
+    (button: Button): ReactElement => {
+      return (
+        <Button name={button.name} sign={button.id} key={button.id}>
+          {button.name}
+        </Button>
+      )
+    }
   )
-})
+  console.log(Button)
+  return <div>{buttonsTab}</div>
+}
 
-export default fullList
+const Buttons: FC = (): ReactElement => {
+  return (
+    <div>
+      <FullList />
+    </div>
+  )
+}
+
+export default Buttons
