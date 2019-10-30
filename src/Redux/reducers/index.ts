@@ -1,4 +1,4 @@
-import { Actions, SET_VALUE } from '../actions'
+import { Actions, SET_VALUE, ADD_NUMBERS } from '../actions'
 
 export interface RootState {
   value: number
@@ -13,7 +13,12 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
     case SET_VALUE:
       return {
         ...state,
-        value: state.value++
+        value: state.value + action.index
+      }
+    case ADD_NUMBERS:
+      return {
+        ...state,
+        value: state.value + 10
       }
     default:
       return state

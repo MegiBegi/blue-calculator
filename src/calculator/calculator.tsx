@@ -7,7 +7,7 @@ import {
   ScoreInputWrapper
 } from './styledCalculator'
 import Buttons from './buttons/buttons'
-import { setValue } from '../Redux/actions'
+import { setValue, addNumbers } from '../Redux/actions'
 import { dispatch } from '../Redux/store'
 import { RootState } from '../Redux/reducers'
 import { connect } from 'react-redux'
@@ -19,21 +19,26 @@ interface CalculatorStateProps {
 interface CalculatorProps extends CalculatorStateProps {}
 
 const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
-  const handleClick = (): void => {
-    currentValue >= 0 ? dispatch(setValue()) : console.log('false')
-    console.log(currentValue)
+  const handleClick = (event: any): void => {
+    const buttonName = event.target.name
+    buttonName === '+' ? dispatch(addNumbers()) : dispatch(setValue(buttonName))
   }
 
   return (
     <PageContainer>
       <StyledCalculator>
         <ScoreInputWrapper>
-          <ScoreInput type='text' />
+          <ScoreInput
+            type='text'
+            value={currentValue}
+            onChange={() => 'yabadabadoo'}
+          />
         </ScoreInputWrapper>
         <ButtonsWrapper>
           <Buttons onButtonClick={handleClick} />
         </ButtonsWrapper>
       </StyledCalculator>
+      <h1>the current value is {currentValue}</h1>
     </PageContainer>
   )
 }
