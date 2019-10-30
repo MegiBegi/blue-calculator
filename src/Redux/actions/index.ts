@@ -1,22 +1,31 @@
-export const SET_VALUE = 'SET VALUE'
-export const ADD_NUMBERS = 'ADD NUMBERS'
+export const GET_RESULT = 'GET RESULT'
+export const PROVIDE_INPUT = 'PROVIDE INPUT'
+export const ADD_A_NUMBER = 'ADD A NUMBER'
 
-interface SetValue {
-  type: 'SET VALUE'
-  index: number
+interface GetResult {
+  type: 'GET RESULT'
 }
 
-interface AddNumbers {
-  type: 'ADD NUMBERS'
+interface ProvideInput {
+  type: 'PROVIDE INPUT'
+  digit: number
 }
 
-export type Actions = SetValue | AddNumbers
+interface AddANumber {
+  type: 'ADD A NUMBER'
+}
 
-export const setValue = (index: number): SetValue => ({
-  type: SET_VALUE,
-  index
+export type Actions = GetResult | ProvideInput | AddANumber
+
+export const getResult = (): GetResult => ({
+  type: GET_RESULT
 })
 
-export const addNumbers = (): AddNumbers => ({
-  type: ADD_NUMBERS
+export const provideInput = (digit: number): ProvideInput => ({
+  type: PROVIDE_INPUT,
+  digit
+})
+
+export const addANumber = (): AddANumber => ({
+  type: ADD_A_NUMBER
 })

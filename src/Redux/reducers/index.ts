@@ -1,25 +1,31 @@
-import { Actions, SET_VALUE, ADD_NUMBERS } from '../actions'
+import { Actions, GET_RESULT, PROVIDE_INPUT, ADD_A_NUMBER } from '../actions'
 
 export interface RootState {
-  value: number
+  displayed: string
 }
 
 const initialState: RootState = {
-  value: 0
+  displayed: ''
 }
 
 const mainReducer = (state: RootState = initialState, action: Actions) => {
   switch (action.type) {
-    case SET_VALUE:
+    case PROVIDE_INPUT:
       return {
         ...state,
-        value: state.value + action.index
+        displayed: state.displayed + action.digit
       }
-    case ADD_NUMBERS:
+    case GET_RESULT:
       return {
         ...state,
-        value: state.value + 10
+        displayed: 'result'
       }
+    case ADD_A_NUMBER:
+      return {
+        ...state,
+        displayed: 'addition'
+      }
+
     default:
       return state
   }
