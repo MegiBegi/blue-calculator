@@ -7,7 +7,7 @@ import {
   ScoreInputWrapper
 } from './styledCalculator'
 import Buttons from './buttons/buttons'
-import { getResult, provideInput, addANumber } from '../Redux/actions'
+import { getResult, provideInput } from '../Redux/actions'
 import { dispatch } from '../Redux/store'
 import { RootState } from '../Redux/reducers'
 import { connect } from 'react-redux'
@@ -23,8 +23,6 @@ const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
     const buttonName = event.target.name
     if (buttonName === '=') {
       dispatch(getResult())
-    } else if (buttonName === '+') {
-      dispatch(addANumber())
     } else {
       dispatch(provideInput(buttonName))
     }

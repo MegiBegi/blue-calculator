@@ -1,4 +1,4 @@
-import { Actions, GET_RESULT, PROVIDE_INPUT, ADD_A_NUMBER } from '../actions'
+import { Actions, GET_RESULT, PROVIDE_INPUT } from '../actions'
 
 export interface RootState {
   displayed: string
@@ -16,14 +16,13 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
         displayed: state.displayed + action.digit
       }
     case GET_RESULT:
+      const str = state.displayed
+      const res = str.match(/\d+/g)
+      console.log(res)
+
       return {
         ...state,
         displayed: 'result'
-      }
-    case ADD_A_NUMBER:
-      return {
-        ...state,
-        displayed: 'addition'
       }
 
     default:
