@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC, ReactElement } from 'react'
 import {
   PageContainer,
   ScoreInput,
@@ -8,7 +8,7 @@ import {
 } from './styledCalculator'
 import Buttons from './buttons/buttons'
 
-const Calculator = () => (
+const Calculator: FC = (): ReactElement => (
   <PageContainer>
     <StyledCalculator>
       <ScoreInputWrapper>
