@@ -32,11 +32,13 @@ export const PageContainer = styled.div`
 `
 export const AllButtons = styled.div`
   height: 329px;
-  width: 270px;
+  width: 244px;
   padding-left: 28px;
-  padding-right: 2px;
+  padding-right: 28px;
   padding-bottom: 38px;
   padding-top: 42px;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-around;
 `

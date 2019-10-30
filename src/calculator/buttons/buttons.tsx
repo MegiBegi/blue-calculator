@@ -26,15 +26,11 @@ const FullList: FC = () => {
     }
   )
   console.log(Button)
-  return <div>{buttonsTab}</div>
+  return <>{buttonsTab}</>
 }
 
 const Buttons: FC = (): ReactElement => {
-  return (
-    <div>
-      <FullList />
-    </div>
-  )
+  return <FullList />
 }
 
 export default Buttons

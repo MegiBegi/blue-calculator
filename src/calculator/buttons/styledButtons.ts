@@ -15,8 +15,10 @@ const StyledButton = styled.button<ButtonProps>`
   width: 64px;
   line-height: 64px;
   border-radius: 50%;
-  margin-bottom: 24.3px;
-  margin-right: 26px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export default StyledButton
