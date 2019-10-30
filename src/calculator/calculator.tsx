@@ -3,14 +3,17 @@ import {
   PageContainer,
   ScoreInput,
   StyledCalculator,
-  AllButtons
+  AllButtons,
+  ScoreInputWrapper
 } from './styledCalculator'
 import Buttons from './buttons/buttons'
 
 const Calculator = () => (
   <PageContainer>
     <StyledCalculator>
-      <ScoreInput type='text' />
+      <ScoreInputWrapper>
+        <ScoreInput type='text' />
+      </ScoreInputWrapper>
       <AllButtons>
         <Buttons />
       </AllButtons>

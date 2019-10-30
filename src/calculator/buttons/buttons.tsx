@@ -15,7 +15,7 @@ export const buttonsList = names.map((name, index) => {
   }
 })
 
-const FullList: FC = () => {
+const FullList: FC = (): ReactElement => {
   const buttonsTab = buttonsList.map(
     (button: Button): ReactElement => {
       return (
@@ -25,7 +25,7 @@ const FullList: FC = () => {
       )
     }
   )
-  console.log(Button)
+
   return <>{buttonsTab}</>
 }
 

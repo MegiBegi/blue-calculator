@@ -1,11 +1,26 @@
 import styled from 'styled-components'
 
+export const PageContainer = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+`
+
 export const StyledCalculator = styled.div`
   width: 300px;
   height: 506px;
   border-radius: 10px;
   background-color: #0095b8;
   padding: 0;
+`
+export const ScoreInputWrapper = styled.div`
+  width: 300px;
+  height: auto;
+  display: flex;
+  justify-content: center;
 `
 
 export const ScoreInput = styled.input`
@@ -18,18 +33,8 @@ export const ScoreInput = styled.input`
   font-family: 'Nothing You Could Do';
   text-indent: 20px;
   line-height: 63px;
-  margin-left: 25px;
-  margin-right: 26px;
 `
 
-export const PageContainer = styled.div`
-  width: 100vw;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff;
-`
 export const AllButtons = styled.div`
   height: 329px;
   width: 244px;

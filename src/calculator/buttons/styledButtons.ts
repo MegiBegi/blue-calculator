@@ -21,11 +21,11 @@ const StyledButton = styled.button<ButtonProps>`
   align-items: center;
   border: none;
   outline: none;
+
   :hover {
-    -webkit-box-shadow: 0px 0px 2px 4px rgba(255, 255, 255, 0.77);
-    -moz-box-shadow: 0px 0px 2px 4px rgba(255, 255, 255, 0.77);
     box-shadow: 0px 0px 2px 4px rgba(255, 255, 255, 0.77);
   }
+
   :active {
     background-color: #660c2b;
   }
