@@ -35,7 +35,7 @@ export const ScoreInput = styled.input`
   line-height: 63px;
 `
 
-export const AllButtons = styled.div`
+export const ButtonsWrapper = styled.div`
   height: 329px;
   width: 244px;
   padding-left: 28px;

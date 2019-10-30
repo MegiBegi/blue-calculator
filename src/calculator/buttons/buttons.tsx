@@ -15,11 +15,20 @@ export const buttonsList = names.map((name, index) => {
   }
 })
 
-const FullList: FC = (): ReactElement => {
+interface FullListProps {
+  onButtonClick: any
+}
+
+const FullList: FC<FullListProps> = ({ onButtonClick }): ReactElement => {
   const buttonsTab = buttonsList.map(
     (button: Button): ReactElement => {
       return (
-        <Button name={button.name} sign={button.id} key={button.id}>
+        <Button
+          name={button.name}
+          sign={button.id}
+          key={button.id}
+          onClick={onButtonClick}
+        >
           {button.name}
         </Button>
       )
@@ -29,8 +38,4 @@ const FullList: FC = (): ReactElement => {
   return <>{buttonsTab}</>
 }
 
-const Buttons: FC = (): ReactElement => {
-  return <FullList />
-}
-
-export default Buttons
+export default FullList
