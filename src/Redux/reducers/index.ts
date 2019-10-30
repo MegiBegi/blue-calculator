@@ -1,4 +1,5 @@
 import { Actions, GET_RESULT, PROVIDE_INPUT } from '../actions'
+const R = require('ramda')
 
 export interface RootState {
   displayed: string
@@ -16,9 +17,14 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
         displayed: state.displayed + action.digit
       }
     case GET_RESULT:
-      const str = state.displayed
-      const res = str.match(/\d+/g)
-      console.log(res)
+      const calculate = () => {
+        const str = state.displayed
+        const res = str.match(/\d+/g)
+        console.log(res)
+        const final = R.add(res)
+        console.log(final)
+      }
+      calculate()
 
       return {
         ...state,
