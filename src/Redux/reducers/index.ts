@@ -1,12 +1,14 @@
 import { add } from 'ramda'
-import { Actions, GET_RESULT, PROVIDE_INPUT } from '../actions'
+import { Actions, GET_RESULT, PROVIDE_INPUT, RESET_RESULT } from '../actions'
 
 export interface RootState {
   displayed: string
+  done: boolean
 }
 
 const initialState: RootState = {
-  displayed: ''
+  displayed: '',
+  done: false
 }
 
 const mainReducer = (state: RootState = initialState, action: Actions) => {
@@ -25,9 +27,16 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       console.log(finalResult)
       return {
         ...state,
-
-        displayed: finalString
+        displayed: finalString,
+        done: true
       }
+    case RESET_RESULT:
+      if (state.done)
+        return {
+          ...state,
+          displayed: '' + action.digit,
+          done: false
+        }
 
     default:
       return state

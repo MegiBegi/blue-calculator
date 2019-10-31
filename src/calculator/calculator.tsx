@@ -1,4 +1,10 @@
 import React, { FC, ReactElement } from 'react'
+import { connect } from 'react-redux'
+import { equals } from 'ramda'
+import { getResult, provideInput, resetResult } from '../Redux/actions'
+import { dispatch } from '../Redux/store'
+import { RootState } from '../Redux/reducers'
+import Buttons from './buttons/buttons'
 import {
   PageContainer,
   ScoreInput,
@@ -6,11 +12,6 @@ import {
   ButtonsWrapper,
   ScoreInputWrapper
 } from './styledCalculator'
-import Buttons from './buttons/buttons'
-import { getResult, provideInput } from '../Redux/actions'
-import { dispatch } from '../Redux/store'
-import { RootState } from '../Redux/reducers'
-import { connect } from 'react-redux'
 
 interface CalculatorStateProps {
   currentValue: string | null
@@ -21,10 +22,13 @@ interface CalculatorProps extends CalculatorStateProps {}
 const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
   const handleClick = (event: any): void => {
     const buttonName = event.target.name
-    if (buttonName === '=') {
+    if (equals(buttonName, '=')) {
       dispatch(getResult())
     } else {
       dispatch(provideInput(buttonName))
+    }
+    if (!equals(buttonName, '+') && !equals(buttonName, '=')) {
+      dispatch(resetResult(buttonName))
     }
   }
 
