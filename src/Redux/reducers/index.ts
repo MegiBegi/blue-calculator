@@ -3,10 +3,12 @@ import { Actions, GET_RESULT, PROVIDE_INPUT } from '../actions'
 
 export interface RootState {
   displayed: string | null
+  result: string
 }
 
 const initialState: RootState = {
-  displayed: '0'
+  displayed: '',
+  result: '0'
 }
 
 const mainReducer = (state: RootState = initialState, action: Actions) => {
@@ -14,7 +16,8 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
     case PROVIDE_INPUT:
       return {
         ...state,
-        displayed: state.displayed ? state.displayed + action.digit : ''
+        result: state.displayed ? state.displayed + action.digit : '',
+        displayed: state.result ? state.result : '0'
       }
     case GET_RESULT:
       const str = state.displayed
@@ -23,7 +26,8 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       const finalResult = result && result.toString()
       return {
         ...state,
-        displayed: finalResult
+        result: finalResult ? finalResult : '0',
+        displayed: state.result ? state.result : '0'
       }
 
     default:
