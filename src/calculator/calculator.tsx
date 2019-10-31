@@ -13,7 +13,7 @@ import { RootState } from '../Redux/reducers'
 import { connect } from 'react-redux'
 
 interface CalculatorStateProps {
-  currentValue: string
+  currentValue: string | null
 }
 
 interface CalculatorProps extends CalculatorStateProps {}
@@ -34,7 +34,7 @@ const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
         <ScoreInputWrapper>
           <ScoreInput
             type='text'
-            value={currentValue}
+            value={currentValue || ''}
             onChange={() => 'yabadabadoo'}
             placeholder='0'
           />
@@ -43,7 +43,6 @@ const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
           <Buttons onButtonClick={handleClick} />
         </ButtonsWrapper>
       </StyledCalculator>
-      <h1>the current value is {currentValue}</h1>
     </PageContainer>
   )
 }
