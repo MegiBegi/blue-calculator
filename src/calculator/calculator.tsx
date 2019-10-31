@@ -1,7 +1,12 @@
 import React, { FC, ReactElement } from 'react'
 import { connect } from 'react-redux'
 import { equals } from 'ramda'
-import { getResult, provideInput, resetResult } from '../Redux/actions'
+import {
+  getResult,
+  provideInput,
+  resetResult,
+  usedPlus
+} from '../Redux/actions'
 import { dispatch } from '../Redux/store'
 import { RootState } from '../Redux/reducers'
 import Buttons from './buttons/buttons'
@@ -24,6 +29,8 @@ const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
     const buttonName = event.target.name
     if (equals(buttonName, '=')) {
       dispatch(getResult())
+    } else if (equals(buttonName, '+')) {
+      dispatch(usedPlus(buttonName))
     } else {
       dispatch(provideInput(buttonName))
     }
