@@ -5,7 +5,9 @@ import {
   getResult,
   provideInput,
   resetResult,
-  usedPlus
+  usedPlus,
+  zero,
+  indexOfAClick
 } from '../Redux/actions'
 import { dispatch } from '../Redux/store'
 import { RootState } from '../Redux/reducers'
@@ -31,10 +33,18 @@ const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
       dispatch(getResult())
     } else if (equals(buttonName, '+')) {
       dispatch(usedPlus(buttonName))
-    } else {
+    } else if (equals(buttonName, '0')) {
+      dispatch(zero(buttonName))
+    } 
+    else {
+      dispatch(indexOfAClick())
       dispatch(provideInput(buttonName))
     }
-    if (!equals(buttonName, '+') && !equals(buttonName, '=')) {
+    if (
+      !equals(buttonName, '+') &&
+      !equals(buttonName, '=') &&
+      !equals(buttonName, '0')
+    ) {
       dispatch(resetResult(buttonName))
     }
   }
