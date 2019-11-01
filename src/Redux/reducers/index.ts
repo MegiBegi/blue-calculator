@@ -15,6 +15,8 @@ export interface RootState {
   usedPlus: boolean
   zero: boolean
   index: number
+  tooMuch: boolean
+  noSecPAr: boolean
 }
 
 const initialState: RootState = {
@@ -22,69 +24,94 @@ const initialState: RootState = {
   done: false,
   usedPlus: false,
   zero: false,
-  index: 0
+  index: 0,
+  tooMuch: false,
+  noSecPAr: false
 }
 
 const mainReducer = (state: RootState = initialState, action: Actions) => {
   switch (action.type) {
     case INDEX_OF_A_CLICK:
+      console.log('index of a click')
       return {
         ...state,
-index: state.index + 1
+        index: state.index + 1
       }
-    
+
     case PROVIDE_INPUT:
-      return {
-        ...state,
-        displayed: state.displayed + action.digit
-      }
+      console.log('provide input')
+      const theFinalState =
+        state.index < 12
+          ? { ...state, displayed: state.displayed + action.digit }
+          : { ...state, displayed: 'Too much!!!', tooMuch: true }
 
-    case USED_PLUS: 
-    return {
-        ...state,
-        displayed: state.displayed + action.digit,
-        usedPlus: true
-      }
+      return theFinalState
 
-    case ZERO:
-    const verifiedState =
-      state.index === 0
-        ? state
+    case USED_PLUS:
+      console.log('used plus')
+      const anotherState = state.tooMuch
+        ? { ...state, displayed: 'Too much!!!' }
         : {
             ...state,
             displayed: state.displayed + action.digit,
-            zero: true
+            usedPlus: true
           }
-    return verifiedState
+      return anotherState
+
+    case ZERO:
+      console.log('zero')
+      const verifiedState =
+        state.index === 0
+          ? state
+          : {
+              ...state,
+              displayed: state.displayed + action.digit,
+              zero: true
+            }
+      const whatIsDisplayed = state.tooMuch
+        ? { ...state, displayed: 'Too much!!!' }
+        : verifiedState
+      return whatIsDisplayed
 
     case GET_RESULT:
+      console.log('get result')
       const str = state.displayed
       const res = str && str.match(/\d+/g)
       const result = res && add(res[0], res[1])
       const finalResult = result && result.toString()
-      const finalString = finalResult ? finalResult : ''
-console.log(finalResult)
+console.log('final result:'+ finalResult)
+      const strTo = state.displayed
+      const resTo = strTo && strTo.match(/\d+/g)
+      const resultTo = resTo && resTo
+      const finalResult2 = resultTo && resultTo.toString()
+      const theFinalResult2 = finalResult2 && finalResult2
+      const theFinal = theFinalResult2 ? theFinalResult2 : ''
+console.log('the final :' + theFinal)
+
       const newState = state.usedPlus
         ? {
             ...state,
-            displayed: finalString,
-            done: true,
+            displayed: finalResult ? finalResult : theFinal,
+            done: false,
             usedPlus: false,
             index: 0
           }
-        : state
+        : {
+            ...state,
+            done: false,
+           
+          }
 
       return newState
 
     case RESET_RESULT:
-      const theNewState = state.done 
-        ? {...state,
-          displayed: '' + action.digit,
-           done: false
-          } 
+    console.log('reset result: state.done:' + state.done)  
+    const theNewState = state.done 
+        ? { ...state, displayed: '' + action.digit, 
+        done: false }
         : state
 
-return theNewState
+      return theNewState
 
     default:
       return state
