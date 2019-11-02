@@ -1,47 +1,40 @@
-import { add } from 'ramda'
+import { add, includes } from 'ramda'
 import {
   Actions,
   GET_RESULT,
   PROVIDE_INPUT,
-  RESET_RESULT,
   USED_PLUS,
   ZERO,
-  INDEX_OF_A_CLICK
 } from '../actions'
 
 export interface RootState {
   displayed: string
-  done: boolean
-  usedPlus: boolean
+    usedPlus: boolean
   zero: boolean
-  index: number
+  
   tooMuch: boolean
   noSecPAr: boolean
+  plusCheck: boolean
 }
 
 const initialState: RootState = {
   displayed: '',
-  done: false,
   usedPlus: false,
   zero: false,
-  index: 0,
+  
   tooMuch: false,
-  noSecPAr: false
+  noSecPAr: false,
+  plusCheck: false
 }
 
 const mainReducer = (state: RootState = initialState, action: Actions) => {
   switch (action.type) {
-    case INDEX_OF_A_CLICK:
-      console.log('index of a click')
-      return {
-        ...state,
-        index: state.index + 1
-      }
-
+    
     case PROVIDE_INPUT:
       console.log('provide input')
+      const currentInput = state.displayed
       const theFinalState =
-        state.index < 12
+        currentInput.length < 11
           ? { ...state, displayed: state.displayed + action.digit }
           : { ...state, displayed: 'Too much!!!', tooMuch: true }
 
@@ -49,25 +42,35 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
 
     case USED_PLUS:
       console.log('used plus')
-      const anotherState = state.tooMuch
+      const anotherState = state.tooMuch 
         ? { ...state, displayed: 'Too much!!!' }
         : {
             ...state,
             displayed: state.displayed + action.digit,
-            usedPlus: true
+           
           }
-      return anotherState
+
+          const tooManyPluses = includes('+', state.displayed) 
+          ? state:
+          anotherState
+
+          const theCurrentState = state.displayed
+          const isPlusFirst = includes('', theCurrentState)
+          ? state:
+          tooManyPluses 
+
+      return isPlusFirst
 
     case ZERO:
       console.log('zero')
-      const verifiedState =
-        state.index === 0
-          ? state
-          : {
-              ...state,
-              displayed: state.displayed + action.digit,
-              zero: true
-            }
+      const currentState = state.displayed
+      const verifiedState = includes(currentState, '0')
+        ? state
+        : {
+            ...state,
+            displayed: state.displayed + action.digit,
+            zero: true
+          }
       const whatIsDisplayed = state.tooMuch
         ? { ...state, displayed: 'Too much!!!' }
         : verifiedState
@@ -83,35 +86,19 @@ console.log('final result:'+ finalResult)
       const strTo = state.displayed
       const resTo = strTo && strTo.match(/\d+/g)
       const resultTo = resTo && resTo
-      const finalResult2 = resultTo && resultTo.toString()
-      const theFinalResult2 = finalResult2 && finalResult2
-      const theFinal = theFinalResult2 ? theFinalResult2 : ''
+      const finalResultTo = resultTo && resultTo.toString()
+      const theFinalResultTo = finalResultTo && finalResultTo
+      const theFinal = theFinalResultTo ? theFinalResultTo : ''
 console.log('the final :' + theFinal)
 
-      const newState = state.usedPlus
-        ? {
+    
+
+      return {
             ...state,
             displayed: finalResult ? finalResult : theFinal,
-            done: false,
             usedPlus: false,
             index: 0
           }
-        : {
-            ...state,
-            done: false,
-           
-          }
-
-      return newState
-
-    case RESET_RESULT:
-    console.log('reset result: state.done:' + state.done)  
-    const theNewState = state.done 
-        ? { ...state, displayed: '' + action.digit, 
-        done: false }
-        : state
-
-      return theNewState
 
     default:
       return state

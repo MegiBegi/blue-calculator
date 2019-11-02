@@ -4,10 +4,8 @@ import { equals } from 'ramda'
 import {
   getResult,
   provideInput,
-  resetResult,
   usedPlus,
-  zero,
-  indexOfAClick
+  zero
 } from '../Redux/actions'
 import { dispatch } from '../Redux/store'
 import { RootState } from '../Redux/reducers'
@@ -37,15 +35,7 @@ const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
       dispatch(zero(buttonName))
     } 
     else {
-      dispatch(indexOfAClick())
       dispatch(provideInput(buttonName))
-    }
-    if (
-      !equals(buttonName, '+') &&
-      !equals(buttonName, '=') &&
-      !equals(buttonName, '0')
-    ) {
-      dispatch(resetResult(buttonName))
     }
   }
 
