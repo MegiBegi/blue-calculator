@@ -35,7 +35,7 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       const theCurrentState = state.displayed
       const properScenario = {
         ...state,
-        displayed: state.displayed + action.digit
+        displayed: state.displayed + '+'
       }
       const plusesOverload = endsWith('+', theCurrentState)
         ? state
@@ -49,7 +49,7 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
         ? state
         : {
             ...state,
-            displayed: state.displayed + action.digit,
+            displayed: state.displayed + '0',
             zero: true
           }
 
