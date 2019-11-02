@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react'
 import { connect } from 'react-redux'
-import { equals, includes, endsWith } from 'ramda'
+import { includes, endsWith } from 'ramda'
 import { noop } from 'ramda-adjunct'
 import {
   getResult,
@@ -38,20 +38,23 @@ const Calculator: FC<CalculatorProps> = ({
     const includesPlus = includes('+', currentValue)
     const endsWithAPlus = endsWith('+', currentValue)
 
-    if (equals(buttonName, '=') && !tooMuchText && includesPlus) {
-      dispatch(getResult())
-    } else if (equals(buttonName, '+') && !tooMuchText && !endsWithAPlus) {
-      dispatch(usedPlus(buttonName))
-    } else if (equals(buttonName, '0') && !tooMuchText) {
-      dispatch(zero(buttonName))
-    } else if (
-      includes(buttonName, ['1', '2', '3', '4', '5', '6', '7', '8', '9']) &&
-      !tooMuchText
-    ) {
-      dispatch(provideInput(buttonName))
-    }
-    if (equals(buttonName, '+') && includesPlus && !endsWithAPlus) {
-      dispatch(getResult())
+    switch (buttonName) {
+      case '=':
+        !tooMuchText && includesPlus && dispatch(getResult())
+        break
+
+      case '+':
+        !tooMuchText && !endsWithAPlus && dispatch(usedPlus(buttonName))
+        includesPlus && !endsWithAPlus && dispatch(getResult())
+        break
+
+      case '0':
+        !tooMuchText && dispatch(zero(buttonName))
+        break
+
+      default:
+        !tooMuchText && dispatch(provideInput(buttonName))
+        break
     }
   }
 
