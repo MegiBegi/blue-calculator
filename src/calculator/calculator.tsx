@@ -44,12 +44,12 @@ const Calculator: FC<CalculatorProps> = ({
         break
 
       case '+':
-        !tooMuchText && !endsWithAPlus && dispatch(usedPlus(buttonName))
+        !tooMuchText && !endsWithAPlus && dispatch(usedPlus())
         includesPlus && !endsWithAPlus && dispatch(getResult())
         break
 
       case '0':
-        !tooMuchText && dispatch(zero(buttonName))
+        !tooMuchText && dispatch(zero())
         break
 
       default:
