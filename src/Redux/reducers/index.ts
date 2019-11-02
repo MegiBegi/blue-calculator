@@ -20,7 +20,6 @@ export interface RootState {
 const initialState: RootState = {
   displayed: '',
   zero: false,
-  
   tooMuch: false,
   noSecPAr: false,
   plusCheck: 0
@@ -32,7 +31,7 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
     case PROVIDE_INPUT:
       const currentInput = state.displayed
       const theFinalState =
-        currentInput.length < 11
+        currentInput.length < 11 
           ? { ...state, displayed: state.displayed + action.digit }
           : { ...state, displayed: 'Too much!!!', tooMuch: true }
 
@@ -73,6 +72,7 @@ const plusesOverload = endsWith('+', theCurrentState) ? state : properScenario
     const result = eval(whatIsTheState)
     console.log('result:' + result)
     const displayedResult = result.toString()
+   
       return {
         ...state,
         displayed: displayedResult,

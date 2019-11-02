@@ -21,28 +21,29 @@ import {
 interface CalculatorStateProps {
   currentValue: string | null
   checkingRenderOnPlus: number
-
+  tooMuchText: boolean
 }
 
 interface CalculatorProps extends CalculatorStateProps {}
 
 const Calculator: FC<CalculatorProps> = ({
   currentValue,
-  checkingRenderOnPlus
+  checkingRenderOnPlus,
+  tooMuchText
 }): ReactElement => {
   const handleClick = (event: any): void => {
     const buttonName = event.target.name
-    if (equals(buttonName, '=')) {
+    if ((equals(buttonName, '=')) && !tooMuchText) {
       dispatch(getResult())
-    } else if (equals(buttonName, '+')) {
-      dispatch(usedPlus(buttonName))
-      
-    } else if (equals(buttonName, '0')) {
-      dispatch(zero(buttonName))
-    } else {
-      dispatch(provideInput(buttonName))
-    } if (equals(buttonName, '+') && checkingRenderOnPlus >= 1 )  {
-       dispatch(getResult())
+    } else if (equals(buttonName, '+') && !tooMuchText) {
+             dispatch(usedPlus(buttonName))
+           } else if (equals(buttonName, '0') && !tooMuchText) {
+             dispatch(zero(buttonName))
+           } else if (!tooMuchText) {
+             dispatch(provideInput(buttonName))
+           }
+    if (equals(buttonName, '+') && checkingRenderOnPlus >= 1) {
+      dispatch(getResult())
     }
   }
 
@@ -67,7 +68,8 @@ const Calculator: FC<CalculatorProps> = ({
 
 const mapStateToProps = (state: RootState): CalculatorStateProps => ({
   currentValue: state.displayed,
-  checkingRenderOnPlus: state.plusCheck
+  checkingRenderOnPlus: state.plusCheck,
+  tooMuchText: state.tooMuch
 })
 
 export default connect<any, any, any, any>(
