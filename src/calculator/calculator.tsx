@@ -38,9 +38,9 @@ const Calculator: FC<CalculatorProps> = ({
     const includesPlus = includes('+', currentValue)
     const endsWithAPlus = endsWith('+', currentValue)
 
-    if (equals(buttonName, '=') && !tooMuchText) {
+    if (equals(buttonName, '=') && !tooMuchText && includesPlus) {
       dispatch(getResult())
-    } else if (equals(buttonName, '+') && !tooMuchText) {
+    } else if (equals(buttonName, '+') && !tooMuchText && !endsWithAPlus) {
       dispatch(usedPlus(buttonName))
     } else if (equals(buttonName, '0') && !tooMuchText) {
       dispatch(zero(buttonName))
