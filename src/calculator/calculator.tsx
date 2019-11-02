@@ -1,12 +1,7 @@
 import React, { FC, ReactElement } from 'react'
 import { connect } from 'react-redux'
-import { equals } from 'ramda'
-import {
-  getResult,
-  provideInput,
-  usedPlus,
-  zero
-} from '../Redux/actions'
+import { equals, includes, endsWith } from 'ramda'
+import { getResult, provideInput, usedPlus, zero } from '../Redux/actions'
 import { dispatch } from '../Redux/store'
 import { RootState } from '../Redux/reducers'
 import Buttons from './buttons/buttons'
@@ -19,7 +14,7 @@ import {
 } from './styledCalculator'
 
 interface CalculatorStateProps {
-  currentValue: string | null
+  currentValue: string
   checkingRenderOnPlus: number
   tooMuchText: boolean
 }
@@ -28,21 +23,28 @@ interface CalculatorProps extends CalculatorStateProps {}
 
 const Calculator: FC<CalculatorProps> = ({
   currentValue,
-  checkingRenderOnPlus,
+  //checkingRenderOnPlus,
   tooMuchText
 }): ReactElement => {
   const handleClick = (event: any): void => {
     const buttonName = event.target.name
-    if ((equals(buttonName, '=')) && !tooMuchText) {
+    const includesPlus = includes('+', currentValue)
+    console.log('includesPlus' + includesPlus)
+    const endsWithAPlus = endsWith('+', currentValue)
+console.log('endsWithAPlus' + endsWithAPlus)
+    if (equals(buttonName, '=') && !tooMuchText) {
       dispatch(getResult())
     } else if (equals(buttonName, '+') && !tooMuchText) {
-             dispatch(usedPlus(buttonName))
-           } else if (equals(buttonName, '0') && !tooMuchText) {
-             dispatch(zero(buttonName))
-           } else if (!tooMuchText) {
-             dispatch(provideInput(buttonName))
-           }
-    if (equals(buttonName, '+') && checkingRenderOnPlus >= 1) {
+      dispatch(usedPlus(buttonName))
+    } else if (equals(buttonName, '0') && !tooMuchText) {
+      dispatch(zero(buttonName))
+    } else if (
+      includes(buttonName, ['1', '2', '3', '4', '5', '6', '7', '8', '9']) &&
+      !tooMuchText
+    ) {
+      dispatch(provideInput(buttonName))
+    }
+    if (equals(buttonName, '+') && includesPlus && !endsWithAPlus) {
       dispatch(getResult())
     }
   }

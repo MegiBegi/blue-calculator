@@ -29,11 +29,11 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       const properScenario = {
         ...state,
         displayed: state.displayed + action.digit,
-        plusCheck: state.plusCheck + 1
       }
       const plusesOverload = endsWith('+', theCurrentState)
         ? state
         : properScenario
+      console.log(endsWith('+', theCurrentState), 'plusesOverload')
       return plusesOverload
 
     case ZERO:
