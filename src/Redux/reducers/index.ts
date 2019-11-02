@@ -1,4 +1,4 @@
-import { includes,  } from 'ramda'
+import { includes, endsWith } from 'ramda'
 import {
   Actions,
   GET_RESULT,
@@ -14,7 +14,7 @@ export interface RootState {
   
   tooMuch: boolean
   noSecPAr: boolean
-  plusCheck: boolean
+  plusCheck: number
 }
 
 const initialState: RootState = {
@@ -23,7 +23,7 @@ const initialState: RootState = {
   
   tooMuch: false,
   noSecPAr: false,
-  plusCheck: false
+  plusCheck: 0
 }
 
 const mainReducer = (state: RootState = initialState, action: Actions) => {
@@ -39,11 +39,16 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return theFinalState
 
     case USED_PLUS:
-    
+ //const theCurrentState = state.displayed
 
+const properScenario = { ...state, 
+  displayed: state.displayed + action.digit,
+  plusCheck: state.plusCheck + 1 
+}
 
+//const plusesOverload = endsWith('+', theCurrentState) ? state : properScenario
 
-      return { ...state, displayed: state.displayed + action.digit }
+      return properScenario
 
     case ZERO:
       const currentState = state.displayed
@@ -60,14 +65,19 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return whatIsDisplayed
 
     case GET_RESULT:
-    const myState = state.displayed 
-    const result = eval(myState)
+    const myState = state.displayed
+     const myBetterState = myState + '0' 
+    const doesItEndWithPlus = endsWith('+', myState) ? true : false
+    const whatIsTheState = doesItEndWithPlus ? myBetterState : myState
+    console.log('this is my state' + myState)
+    const result = eval(whatIsTheState)
     console.log('result:' + result)
     const displayedResult = result.toString()
       return {
         ...state,
         displayed: displayedResult,
-        index: 0
+        index: 0,
+        plusCheck: 0
       }
 
     default:

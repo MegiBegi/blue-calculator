@@ -20,7 +20,7 @@ import {
 
 interface CalculatorStateProps {
   currentValue: string | null
-  checkingRenderOnPlus: boolean
+  checkingRenderOnPlus: number
 
 }
 
@@ -41,7 +41,7 @@ const Calculator: FC<CalculatorProps> = ({
       dispatch(zero(buttonName))
     } else {
       dispatch(provideInput(buttonName))
-    } if (equals(buttonName, '+') && checkingRenderOnPlus )  {
+    } if (equals(buttonName, '+') && checkingRenderOnPlus >= 1 )  {
        dispatch(getResult())
     }
   }
