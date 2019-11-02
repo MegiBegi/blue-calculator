@@ -16,12 +16,10 @@ interface ProvideInput {
 
 interface UsedPlus {
   type: 'USED PLUS'
-  digit: number
 }
 
 interface Zero {
   type: 'ZERO'
-  digit: number
 }
 
 interface Reset {
@@ -39,14 +37,12 @@ export const provideInput = (digit: number): ProvideInput => ({
   digit
 })
 
-export const usedPlus = (digit: number): UsedPlus => ({
+export const usedPlus = (): UsedPlus => ({
   type: USED_PLUS,
-  digit
 })
 
-export const zero = (digit: number): Zero => ({
+export const zero = (): Zero => ({
   type: ZERO,
-  digit
 })
 
 export const reset = (): Reset => ({
