@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react'
 import { connect } from 'react-redux'
 import { equals, includes, endsWith } from 'ramda'
+import { noop } from 'ramda-adjunct'
 import {
   getResult,
   provideInput,
@@ -30,7 +31,6 @@ interface CalculatorProps extends CalculatorStateProps {}
 
 const Calculator: FC<CalculatorProps> = ({
   currentValue,
-  //checkingRenderOnPlus,
   tooMuchText
 }): ReactElement => {
   const handleClick = (event: any): void => {
@@ -67,7 +67,7 @@ const Calculator: FC<CalculatorProps> = ({
           <ScoreInput
             type='text'
             value={currentValue || ''}
-            onChange={() => 'yabadabadoo'}
+            onChange={noop}
             placeholder='0'
           />
         </ScoreInputWrapper>
