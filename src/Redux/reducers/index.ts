@@ -39,16 +39,16 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return theFinalState
 
     case USED_PLUS:
- //const theCurrentState = state.displayed
+ const theCurrentState = state.displayed
 
 const properScenario = { ...state, 
   displayed: state.displayed + action.digit,
   plusCheck: state.plusCheck + 1 
 }
 
-//const plusesOverload = endsWith('+', theCurrentState) ? state : properScenario
+const plusesOverload = endsWith('+', theCurrentState) ? state : properScenario
 
-      return properScenario
+      return plusesOverload
 
     case ZERO:
       const currentState = state.displayed
