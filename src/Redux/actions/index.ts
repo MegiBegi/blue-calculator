@@ -2,6 +2,7 @@ export const GET_RESULT = 'GET RESULT'
 export const PROVIDE_INPUT = 'PROVIDE INPUT'
 export const USED_PLUS = 'USED PLUS'
 export const ZERO = 'ZERO'
+export const RESET = 'RESET'
 
 
 interface GetResult {
@@ -13,7 +14,6 @@ interface ProvideInput {
   digit: number
 }
 
-
 interface UsedPlus {
   type: 'USED PLUS'
   digit: number
@@ -24,10 +24,11 @@ interface Zero {
   digit: number
 }
 
+interface Reset {
+  type: 'RESET'
+}
 
-
-
-export type Actions = GetResult | ProvideInput | UsedPlus | Zero 
+export type Actions = GetResult | ProvideInput | UsedPlus | Zero | Reset
 
 export const getResult = (): GetResult => ({
   type: GET_RESULT
@@ -46,5 +47,9 @@ export const usedPlus = (digit: number): UsedPlus => ({
 export const zero = (digit: number): Zero => ({
   type: ZERO,
   digit
+})
+
+export const reset = (): Reset => ({
+  type: RESET
 })
 

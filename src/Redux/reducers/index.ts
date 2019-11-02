@@ -1,5 +1,12 @@
 import { includes, endsWith } from 'ramda'
-import { Actions, GET_RESULT, PROVIDE_INPUT, USED_PLUS, ZERO } from '../actions'
+import {
+  Actions,
+  GET_RESULT,
+  PROVIDE_INPUT,
+  USED_PLUS,
+  ZERO,
+  RESET
+} from '../actions'
 
 export interface RootState {
   displayed: string
@@ -28,7 +35,7 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       const theCurrentState = state.displayed
       const properScenario = {
         ...state,
-        displayed: state.displayed + action.digit,
+        displayed: state.displayed + action.digit
       }
       const plusesOverload = endsWith('+', theCurrentState)
         ? state
@@ -45,7 +52,7 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
             displayed: state.displayed + action.digit,
             zero: true
           }
-    
+
       return verifiedState
 
     case GET_RESULT:
@@ -60,7 +67,8 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
         displayed: displayedResult,
         plusCheck: 0
       }
-
+    case RESET:
+      return initialState
     default:
       return state
   }

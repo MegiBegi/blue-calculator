@@ -1,7 +1,13 @@
 import React, { FC, ReactElement } from 'react'
 import { connect } from 'react-redux'
 import { equals, includes, endsWith } from 'ramda'
-import { getResult, provideInput, usedPlus, zero } from '../Redux/actions'
+import {
+  getResult,
+  provideInput,
+  usedPlus,
+  zero,
+  reset
+} from '../Redux/actions'
 import { dispatch } from '../Redux/store'
 import { RootState } from '../Redux/reducers'
 import Buttons from './buttons/buttons'
@@ -10,7 +16,8 @@ import {
   ScoreInput,
   StyledCalculator,
   ButtonsWrapper,
-  ScoreInputWrapper
+  ScoreInputWrapper,
+  ResetButton
 } from './styledCalculator'
 
 interface CalculatorStateProps {
@@ -29,9 +36,8 @@ const Calculator: FC<CalculatorProps> = ({
   const handleClick = (event: any): void => {
     const buttonName = event.target.name
     const includesPlus = includes('+', currentValue)
-    console.log('includesPlus' + includesPlus)
     const endsWithAPlus = endsWith('+', currentValue)
-console.log('endsWithAPlus' + endsWithAPlus)
+
     if (equals(buttonName, '=') && !tooMuchText) {
       dispatch(getResult())
     } else if (equals(buttonName, '+') && !tooMuchText) {
@@ -49,8 +55,13 @@ console.log('endsWithAPlus' + endsWithAPlus)
     }
   }
 
+  const handleReset = (): void => {
+    dispatch(reset())
+  }
+
   return (
     <PageContainer>
+      <ResetButton onClick={handleReset}>Reset</ResetButton>
       <StyledCalculator>
         <ScoreInputWrapper>
           <ScoreInput

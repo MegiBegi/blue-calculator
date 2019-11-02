@@ -15,6 +15,7 @@ export const StyledCalculator = styled.div`
   border-radius: 10px;
   background-color: #0095b8;
   padding: 0;
+  position: relative
 `
 export const ScoreInputWrapper = styled.div`
   width: 300px;
@@ -46,4 +47,32 @@ export const ButtonsWrapper = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-around;
+`
+export const ResetButton = styled.button`
+  font-size: 20px;
+  color: #ffffff;
+  font-family: 'Nothing You Could Do';
+  font-weight: 400;
+  background-color: #a91548;
+  height: 64px;
+  width: 64px;
+  line-height: 64px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  position: absolute;
+  left: 30px;
+  
+
+  :hover {
+    box-shadow: 0px 0px 2px 4px rgba(255, 255, 255, 0.77);
+  }
+
+  :active {
+    background-color: #660c2b;
+  }
 `
