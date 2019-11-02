@@ -1,4 +1,4 @@
-import { add, includes } from 'ramda'
+import { includes,  } from 'ramda'
 import {
   Actions,
   GET_RESULT,
@@ -9,7 +9,7 @@ import {
 
 export interface RootState {
   displayed: string
-    usedPlus: boolean
+   
   zero: boolean
   
   tooMuch: boolean
@@ -19,7 +19,6 @@ export interface RootState {
 
 const initialState: RootState = {
   displayed: '',
-  usedPlus: false,
   zero: false,
   
   tooMuch: false,
@@ -31,7 +30,6 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
   switch (action.type) {
     
     case PROVIDE_INPUT:
-      console.log('provide input')
       const currentInput = state.displayed
       const theFinalState =
         currentInput.length < 11
@@ -41,28 +39,13 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return theFinalState
 
     case USED_PLUS:
-      console.log('used plus')
-      const anotherState = state.tooMuch 
-        ? { ...state, displayed: 'Too much!!!' }
-        : {
-            ...state,
-            displayed: state.displayed + action.digit,
-           
-          }
+    
 
-          const tooManyPluses = includes('+', state.displayed) 
-          ? state:
-          anotherState
 
-          const theCurrentState = state.displayed
-          const isPlusFirst = includes('', theCurrentState)
-          ? state:
-          tooManyPluses 
 
-      return isPlusFirst
+      return { ...state, displayed: state.displayed + action.digit }
 
     case ZERO:
-      console.log('zero')
       const currentState = state.displayed
       const verifiedState = includes(currentState, '0')
         ? state
@@ -77,28 +60,15 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return whatIsDisplayed
 
     case GET_RESULT:
-      console.log('get result')
-      const str = state.displayed
-      const res = str && str.match(/\d+/g)
-      const result = res && add(res[0], res[1])
-      const finalResult = result && result.toString()
-console.log('final result:'+ finalResult)
-      const strTo = state.displayed
-      const resTo = strTo && strTo.match(/\d+/g)
-      const resultTo = resTo && resTo
-      const finalResultTo = resultTo && resultTo.toString()
-      const theFinalResultTo = finalResultTo && finalResultTo
-      const theFinal = theFinalResultTo ? theFinalResultTo : ''
-console.log('the final :' + theFinal)
-
-    
-
+    const myState = state.displayed 
+    const result = eval(myState)
+    console.log('result:' + result)
+    const displayedResult = result.toString()
       return {
-            ...state,
-            displayed: finalResult ? finalResult : theFinal,
-            usedPlus: false,
-            index: 0
-          }
+        ...state,
+        displayed: displayedResult,
+        index: 0
+      }
 
     default:
       return state

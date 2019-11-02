@@ -20,22 +20,29 @@ import {
 
 interface CalculatorStateProps {
   currentValue: string | null
+  checkingRenderOnPlus: boolean
+
 }
 
 interface CalculatorProps extends CalculatorStateProps {}
 
-const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
+const Calculator: FC<CalculatorProps> = ({
+  currentValue,
+  checkingRenderOnPlus
+}): ReactElement => {
   const handleClick = (event: any): void => {
     const buttonName = event.target.name
     if (equals(buttonName, '=')) {
       dispatch(getResult())
     } else if (equals(buttonName, '+')) {
       dispatch(usedPlus(buttonName))
+      
     } else if (equals(buttonName, '0')) {
       dispatch(zero(buttonName))
-    } 
-    else {
+    } else {
       dispatch(provideInput(buttonName))
+    } if (equals(buttonName, '+') && checkingRenderOnPlus )  {
+       dispatch(getResult())
     }
   }
 
@@ -59,7 +66,8 @@ const Calculator: FC<CalculatorProps> = ({ currentValue }): ReactElement => {
 }
 
 const mapStateToProps = (state: RootState): CalculatorStateProps => ({
-  currentValue: state.displayed
+  currentValue: state.displayed,
+  checkingRenderOnPlus: state.plusCheck
 })
 
 export default connect<any, any, any, any>(
