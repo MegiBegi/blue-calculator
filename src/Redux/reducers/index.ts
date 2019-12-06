@@ -21,21 +21,22 @@ const initialState: RootState = {
 }
 
 const mainReducer = (state: RootState = initialState, action: Actions) => {
+  const { displayed } = state
   switch (action.type) {
     case PROVIDE_INPUT:
-      const currentInput = state.displayed
+      const currentInput = displayed
       const theFinalState =
         currentInput.length < 11
-          ? { ...state, displayed: state.displayed + action.digit }
+          ? { ...state, displayed: displayed + action.payload.digit }
           : { ...state, displayed: "Too much!!!", tooMuch: true }
 
       return theFinalState
 
     case USED_PLUS:
-      const theCurrentState = state.displayed
+      const theCurrentState = displayed
       const properScenario = {
         ...state,
-        displayed: state.displayed + "+"
+        displayed: displayed + "+"
       }
       const plusesOverload = endsWith("+", theCurrentState)
         ? state
@@ -43,22 +44,21 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return plusesOverload
 
     case ZERO:
-      const currentState = state.displayed
+      const currentState = displayed
       const verifiedState = includes(currentState, "0")
         ? state
         : {
             ...state,
-            displayed: state.displayed + "0",
+            displayed: displayed + "0",
             zero: true
           }
 
       return verifiedState
 
     case GET_RESULT:
-      const myState = state.displayed
+      const myState = displayed
       const myBetterState = myState + "0"
-      const doesItEndWithPlus = endsWith("+", myState) ? true : false
-      const whatIsTheState = doesItEndWithPlus ? myBetterState : myState
+      const whatIsTheState = endsWith("+", myState) ? myBetterState : myState
       const result = eval(whatIsTheState)
       const displayedResult = result.toString()
       return {

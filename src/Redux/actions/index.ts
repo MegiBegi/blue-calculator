@@ -1,29 +1,30 @@
-export const GET_RESULT = 'GET RESULT'
-export const PROVIDE_INPUT = 'PROVIDE INPUT'
-export const USED_PLUS = 'USED PLUS'
-export const ZERO = 'ZERO'
-export const RESET = 'RESET'
-
+export const GET_RESULT = "GET RESULT"
+export const PROVIDE_INPUT = "PROVIDE INPUT"
+export const USED_PLUS = "USED PLUS"
+export const ZERO = "ZERO"
+export const RESET = "RESET"
 
 interface GetResult {
-  type: 'GET RESULT'
+  type: "GET RESULT"
 }
 
 interface ProvideInput {
-  type: 'PROVIDE INPUT'
-  digit: number
+  type: "PROVIDE INPUT"
+  payload: {
+    digit: number
+  }
 }
 
 interface UsedPlus {
-  type: 'USED PLUS'
+  type: "USED PLUS"
 }
 
 interface Zero {
-  type: 'ZERO'
+  type: "ZERO"
 }
 
 interface Reset {
-  type: 'RESET'
+  type: "RESET"
 }
 
 export type Actions = GetResult | ProvideInput | UsedPlus | Zero | Reset
@@ -34,18 +35,19 @@ export const getResult = (): GetResult => ({
 
 export const provideInput = (digit: number): ProvideInput => ({
   type: PROVIDE_INPUT,
-  digit
+  payload: {
+    digit
+  }
 })
 
 export const usedPlus = (): UsedPlus => ({
-  type: USED_PLUS,
+  type: USED_PLUS
 })
 
 export const zero = (): Zero => ({
-  type: ZERO,
+  type: ZERO
 })
 
 export const reset = (): Reset => ({
   type: RESET
 })
-

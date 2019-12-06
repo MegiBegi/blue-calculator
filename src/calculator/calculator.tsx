@@ -20,14 +20,15 @@ import {
   ResetButton
 } from "./styledCalculator"
 
+type Noop = () => void
+
 interface CalculatorStateProps {
   currentValue: string
   checkingRenderOnPlus: number
   tooMuchText: boolean
 }
 
-interface CalculatorProps extends CalculatorStateProps {}
-interface CalculatorProps extends DispatchProps {}
+type CalculatorProps = CalculatorStateProps & DispatchProps
 
 const Calculator: FC<CalculatorProps> = ({
   currentValue,
@@ -63,13 +64,9 @@ const Calculator: FC<CalculatorProps> = ({
     }
   }
 
-  const handleReset = (): void => {
-    reset()
-  }
-
   return (
     <PageContainer>
-      <ResetButton onClick={handleReset}>Reset</ResetButton>
+      <ResetButton onClick={reset}>Reset</ResetButton>
       <StyledCalculator>
         <ScoreInputWrapper>
           <ScoreInput
@@ -94,11 +91,11 @@ const mapStateToProps = (state: RootState): CalculatorStateProps => ({
 })
 
 interface DispatchProps {
-  getResult: () => void
+  getResult: Noop
   provideInput: (digit: number) => void
-  usedPlus: () => void
-  zero: () => void
-  reset: () => void
+  usedPlus: Noop
+  zero: Noop
+  reset: Noop
 }
 
 const mapDispatchToProps: DispatchProps = {
@@ -109,7 +106,4 @@ const mapDispatchToProps: DispatchProps = {
   reset: reset
 }
 
-export default connect<any, any, any, any>(
-  mapStateToProps,
-  mapDispatchToProps
-)(Calculator)
+export default connect(mapStateToProps, mapDispatchToProps)(Calculator)

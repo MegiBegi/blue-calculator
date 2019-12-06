@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { generateMedia } from "styled-media-query"
 
-const customMedia = generateMedia({
+const media = generateMedia({
   small: "420px"
 })
 
@@ -76,8 +76,8 @@ export const ResetButton = styled.button`
   :active {
     background-color: #660c2b;
   }
-  ${customMedia.lessThan("small")`
-  /* screen width is greater less than 420px (small) */
-  display: none
+
+  ${media.lessThan("small")`
+    display: none
   `}
 `
