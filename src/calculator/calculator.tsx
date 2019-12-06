@@ -1,17 +1,16 @@
-import React, { FC, ReactElement } from 'react'
-import { connect } from 'react-redux'
-import { includes, endsWith } from 'ramda'
-import { noop } from 'ramda-adjunct'
+import React, { FC, ReactElement } from "react"
+import { connect } from "react-redux"
+import { includes, endsWith } from "ramda"
+import { noop } from "ramda-adjunct"
 import {
   getResult,
   provideInput,
   usedPlus,
   zero,
   reset
-} from '../Redux/actions'
-import { dispatch } from '../Redux/store'
-import { RootState } from '../Redux/reducers'
-import Buttons from './buttons/buttons'
+} from "../Redux/actions"
+import { RootState } from "../Redux/reducers"
+import Buttons from "./buttons/buttons"
 import {
   PageContainer,
   ScoreInput,
@@ -19,7 +18,7 @@ import {
   ButtonsWrapper,
   ScoreInputWrapper,
   ResetButton
-} from './styledCalculator'
+} from "./styledCalculator"
 
 interface CalculatorStateProps {
   currentValue: string
@@ -28,38 +27,44 @@ interface CalculatorStateProps {
 }
 
 interface CalculatorProps extends CalculatorStateProps {}
+interface CalculatorProps extends DispatchProps {}
 
 const Calculator: FC<CalculatorProps> = ({
   currentValue,
-  tooMuchText
+  tooMuchText,
+  getResult,
+  provideInput,
+  usedPlus,
+  zero,
+  reset
 }): ReactElement => {
   const handleClick = (event: any): void => {
     const buttonName = event.target.name
-    const includesPlus = includes('+', currentValue)
-    const endsWithAPlus = endsWith('+', currentValue)
+    const includesPlus = includes("+", currentValue)
+    const endsWithAPlus = endsWith("+", currentValue)
 
     switch (buttonName) {
-      case '=':
-        !tooMuchText && includesPlus && dispatch(getResult())
+      case "=":
+        !tooMuchText && includesPlus && getResult()
         break
 
-      case '+':
-        !tooMuchText && !endsWithAPlus && dispatch(usedPlus())
-        includesPlus && !endsWithAPlus && dispatch(getResult())
+      case "+":
+        !tooMuchText && !endsWithAPlus && usedPlus()
+        includesPlus && !endsWithAPlus && getResult()
         break
 
-      case '0':
-        !tooMuchText && dispatch(zero())
+      case "0":
+        !tooMuchText && zero()
         break
 
       default:
-        !tooMuchText && dispatch(provideInput(buttonName))
+        !tooMuchText && provideInput(buttonName)
         break
     }
   }
 
   const handleReset = (): void => {
-    dispatch(reset())
+    reset()
   }
 
   return (
@@ -68,10 +73,10 @@ const Calculator: FC<CalculatorProps> = ({
       <StyledCalculator>
         <ScoreInputWrapper>
           <ScoreInput
-            type='text'
-            value={currentValue || ''}
+            type="text"
+            value={currentValue || ""}
             onChange={noop}
-            placeholder='0'
+            placeholder="0"
           />
         </ScoreInputWrapper>
         <ButtonsWrapper>
@@ -88,7 +93,23 @@ const mapStateToProps = (state: RootState): CalculatorStateProps => ({
   tooMuchText: state.tooMuch
 })
 
+interface DispatchProps {
+  getResult: () => void
+  provideInput: (digit: number) => void
+  usedPlus: () => void
+  zero: () => void
+  reset: () => void
+}
+
+const mapDispatchToProps: DispatchProps = {
+  getResult: getResult,
+  provideInput: provideInput,
+  usedPlus: usedPlus,
+  zero: zero,
+  reset: reset
+}
+
 export default connect<any, any, any, any>(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(Calculator)
