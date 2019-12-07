@@ -72,7 +72,6 @@ const Calculator: FC<CalculatorProps> = ({
             placeholder="0"
           />
         </ScoreInputWrapper>
-
         <ButtonsWrapper>
           <Buttons onButtonClick={handleClick} />
         </ButtonsWrapper>
