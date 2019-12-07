@@ -71,7 +71,7 @@ const Calculator: FC<CalculatorProps> = ({
         <ScoreInputWrapper>
           <ScoreInput
             type="text"
-            value={currentValue || ""}
+            value={currentValue ?? ""}
             onChange={noop}
             placeholder="0"
           />

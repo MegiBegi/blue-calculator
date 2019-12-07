@@ -7,6 +7,7 @@ import {
   ZERO,
   RESET
 } from "../actions"
+import { getSum } from "../../utils"
 
 export interface RootState {
   displayed: string
@@ -57,13 +58,12 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
 
     case GET_RESULT:
       const myState = displayed
-      const myBetterState = myState + "0"
-      const whatIsTheState = endsWith("+", myState) ? myBetterState : myState
-      const result = eval(whatIsTheState)
-      const displayedResult = result.toString()
+      const addZero = myState + "0"
+      const digits = endsWith("+", myState) ? addZero : myState
+      const result = getSum(digits).toString()
       return {
         ...state,
-        displayed: displayedResult,
+        displayed: result,
         plusCheck: 0
       }
     case RESET:
