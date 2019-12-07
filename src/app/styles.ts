@@ -9,6 +9,6 @@ export const GlobalStyles = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Nothing+You+Could+Do&display=swap');
     font-family: 'Nothing You Could Do', cursive;
     padding: 0;
-    margin: 0
+    margin: 0;
   }
 `

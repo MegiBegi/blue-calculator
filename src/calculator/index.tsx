@@ -64,12 +64,15 @@ const Calculator: FC<CalculatorProps> = ({
       <StyledCalculator>
         <ScoreInputWrapper>
           <ScoreInput
+            name="Score input"
+            id="Score input"
             type="text"
             value={currentValue ?? ""}
             onChange={noop}
             placeholder="0"
           />
         </ScoreInputWrapper>
+
         <ButtonsWrapper>
           <Buttons onButtonClick={handleClick} />
         </ButtonsWrapper>

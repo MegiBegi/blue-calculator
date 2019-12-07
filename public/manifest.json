@@ -3,19 +3,9 @@
   "name": "Blue Calculator",
   "icons": [
     {
-      "src": "../src/images/calc.png",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "../src/images/calc.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "../src/images/calc.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "../src/images/192.png",
+      "sizes": "128x128 64x64 32x32 24x24 16x16",
+      "type": "image/png"
     }
   ],
   "start_url": ".",

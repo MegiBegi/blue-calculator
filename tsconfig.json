@@ -31,6 +31,7 @@
     "noEmit": true,
     "baseUrl": "src"
   },
+  "include": ["src"],
   "exclude": [
     "node_modules",
     "build",
@@ -42,6 +43,5 @@
     "config",
     "typedoc.js"
   ],
-  "types": ["./src/typings"],
-  "include": ["src"]
+  "types": ["./src/typings"]
 }

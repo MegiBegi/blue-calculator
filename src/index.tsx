@@ -1,15 +1,29 @@
-import React from "react"
+import React, { Suspense } from "react"
 import ReactDOM from "react-dom"
-import App from "app"
 import * as serviceWorker from "serviceWorker"
 import { Provider } from "react-redux"
 import { store, persistor } from "./redux/store"
 import { PersistGate } from "redux-persist/integration/react"
+import Loader from "react-loaders"
+import { LoaderWrapper } from "utils"
+import "loaders.css/src/animations/line-scale-pulse-out.scss"
+
+const loaderType = "line-scale-pulse-out"
+
+const App = React.lazy((): Promise<any> => import("app"))
+
+const fallback = (
+  <LoaderWrapper>
+    <Loader active type={loaderType} />
+  </LoaderWrapper>
+)
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      <Suspense fallback={fallback}>
+        <App />
+      </Suspense>
     </PersistGate>
   </Provider>,
   document.getElementById("root")

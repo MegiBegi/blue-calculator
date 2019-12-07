@@ -78,6 +78,6 @@ export const ResetButton = styled.button`
   }
 
   ${media.lessThan("small")`
-    display: none
+    display: none;
   `}
 `

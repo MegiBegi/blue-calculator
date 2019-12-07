@@ -1,4 +1,5 @@
 import { findIndex, join } from "ramda"
+import styled from "styled-components"
 
 export const getSum = (input: string): number => {
   const firstNum: string[] = []
@@ -14,3 +15,21 @@ export const getSum = (input: string): number => {
 
   return Number(join("", firstNum)) + Number(join("", secondNum))
 }
+
+export const LoaderWrapper = styled.div`
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  [class*="loader-inner"] {
+    div:nth-child(odd) {
+      background-color: #a91548;
+    }
+
+    div:nth-child(even) {
+      background: #0095b8;
+    }
+  }
+`
