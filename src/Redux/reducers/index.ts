@@ -6,8 +6,8 @@ import {
   USED_PLUS,
   ZERO,
   RESET
-} from "../actions"
-import { getSum } from "../../utils"
+} from "redux/actions"
+import { getSum } from "utils"
 
 export interface RootState {
   displayed: string

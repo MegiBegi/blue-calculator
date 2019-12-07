@@ -3,11 +3,7 @@
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
-    "lib": [
-      "es6",
-      "dom",
-      "esnext.asynciterable"
-    ],
+    "lib": ["es6", "dom", "esnext.asynciterable"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
@@ -32,7 +28,8 @@
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": "src"
   },
   "exclude": [
     "node_modules",
@@ -45,10 +42,6 @@
     "config",
     "typedoc.js"
   ],
-  "types": [
-    "./src/typings"
-  ],
-  "include": [
-    "src"
-  ]
+  "types": ["./src/typings"],
+  "include": ["src"]
 }

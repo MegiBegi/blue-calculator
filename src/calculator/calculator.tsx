@@ -2,15 +2,9 @@ import React, { FC, ReactElement } from "react"
 import { connect } from "react-redux"
 import { includes, endsWith } from "ramda"
 import { noop } from "ramda-adjunct"
-import {
-  getResult,
-  provideInput,
-  usedPlus,
-  zero,
-  reset
-} from "../Redux/actions"
-import { RootState } from "../Redux/reducers"
-import Buttons from "./buttons/buttons"
+import { getResult, provideInput, usedPlus, zero, reset } from "redux/actions"
+import { RootState } from "redux/reducers"
+import Buttons from "calculator/buttons"
 import {
   PageContainer,
   ScoreInput,
@@ -18,7 +12,7 @@ import {
   ButtonsWrapper,
   ScoreInputWrapper,
   ResetButton
-} from "./styledCalculator"
+} from "calculator/styledCalculator"
 
 type Noop = () => void
 

@@ -1,12 +1,12 @@
-import React, { ReactElement, FC } from 'react'
-import Button from './styledButtons'
+import React, { ReactElement, FC } from "react"
+import Button from "calculator/buttons/styledButtons"
 
-interface Button {
+interface ButtonType {
   name: string
   id: number
 }
 
-const names = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '+', '0', '=']
+const names = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "+", "0", "="]
 
 export const buttonsList = names.map((name, index) => {
   return {
@@ -21,7 +21,7 @@ interface FullListProps {
 
 const FullList: FC<FullListProps> = ({ onButtonClick }): ReactElement => {
   const buttonsTab = buttonsList.map(
-    (button: Button): ReactElement => {
+    (button: ButtonType): ReactElement => {
       return (
         <Button
           name={button.name}
