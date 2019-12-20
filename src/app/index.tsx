@@ -1,10 +1,9 @@
 import React, { ReactElement, FC } from "react"
 import Calculator from "calculator"
-import { GlobalStyles } from "app/styles"
+import "app/index.css"
 
 const App: FC = (): ReactElement => (
   <>
-    <GlobalStyles />
     <Calculator />
   </>
 )
