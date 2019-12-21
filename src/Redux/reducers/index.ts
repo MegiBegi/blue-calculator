@@ -23,11 +23,12 @@ const initialState: RootState = {
 
 const mainReducer = (state: RootState = initialState, action: Actions) => {
   const { displayed } = state
+  const MAX_INPUT_LENGTH = 11
   switch (action.type) {
     case PROVIDE_INPUT:
       const currentInput = displayed
       const theFinalState =
-        currentInput.length < 11
+        currentInput.length < MAX_INPUT_LENGTH
           ? { ...state, displayed: displayed + action.payload.digit }
           : { ...state, displayed: "Too much!!!", tooMuch: true }
 

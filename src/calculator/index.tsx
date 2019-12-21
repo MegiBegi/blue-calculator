@@ -44,7 +44,7 @@ const Calculator: FC<CalculatorProps> = ({
         break
 
       case "+":
-        !tooMuchText && !endsWithAPlus && usedPlus()
+        !tooMuchText && !endsWithAPlus && currentValue.length > 0 && usedPlus()
         includesPlus && !endsWithAPlus && getResult()
         break
 
