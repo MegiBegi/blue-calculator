@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from "react"
+import React, { FC } from "react"
 import { connect } from "react-redux"
 import { includes, endsWith } from "ramda"
 import { noop } from "ramda-adjunct"
@@ -32,7 +32,7 @@ const Calculator: FC<CalculatorProps> = ({
   usedPlus,
   zero,
   reset
-}): ReactElement => {
+}) => {
   const handleClick = (event: any): void => {
     const buttonName = event.target.name
     const includesPlus = includes("+", currentValue)
