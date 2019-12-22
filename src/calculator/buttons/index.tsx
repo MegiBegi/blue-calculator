@@ -1,4 +1,4 @@
-import React, { ReactElement, FC } from "react"
+import React, { FC } from "react"
 import Button from "calculator/buttons/styledButtons"
 
 interface ButtonType {
@@ -19,21 +19,19 @@ interface FullListProps {
   onButtonClick: any
 }
 
-const FullList: FC<FullListProps> = ({ onButtonClick }): ReactElement => {
-  const buttonsTab = buttonsList.map(
-    (button: ButtonType): ReactElement => {
-      return (
-        <Button
-          name={button.name}
-          sign={button.id}
-          key={button.id}
-          onClick={onButtonClick}
-        >
-          {button.name}
-        </Button>
-      )
-    }
-  )
+const FullList: FC<FullListProps> = ({ onButtonClick }) => {
+  const buttonsTab = buttonsList.map((button: ButtonType) => {
+    return (
+      <Button
+        name={button.name}
+        sign={button.id}
+        key={button.id}
+        onClick={onButtonClick}
+      >
+        {button.name}
+      </Button>
+    )
+  })
 
   return <>{buttonsTab}</>
 }
