@@ -7,24 +7,24 @@ export const getSum = (input: string): number => {
   const elementsArr: string[] = input.split("")
   const pluses: string[] = []
   const reducedArray: string[] = []
-  const length: number = pluses.length
 
   elementsArr.forEach((el: string): void => {
     el === "+" && pluses.push(el)
   })
 
-  length > 1 &&
+  const plusesL: number = pluses.length
+  plusesL > 1 &&
     elementsArr.forEach((el: string, index: number): void => {
       if (index < elementsArr.length - 2) reducedArray.push(el)
     })
 
   const plusInd = findIndex(
     (el: string): boolean => el === "+",
-    length > 1 ? reducedArray : elementsArr
+    plusesL > 1 ? reducedArray : elementsArr
   )
 
   let currentArray: string[]
-  length > 1 ? (currentArray = reducedArray) : (currentArray = elementsArr)
+  plusesL > 1 ? (currentArray = reducedArray) : (currentArray = elementsArr)
 
   currentArray.forEach((el: string, index: number): void => {
     if (index < plusInd) firstNum.push(el)
