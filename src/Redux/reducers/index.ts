@@ -26,10 +26,13 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
     displayed: "Too much!!!",
     tooMuch: true
   }
+  const avoidMultiplyZeros =
+    includes("+", displayed) && split("+", displayed)[1].startsWith("0")
   const MAX_INPUT_LENGTH = 11
   switch (action.type) {
     case PROVIDE_INPUT:
       if (displayed === "0") return state
+      if (avoidMultiplyZeros) return state
       const theFinalState =
         displayed.length < MAX_INPUT_LENGTH
           ? { ...state, displayed: displayed + action.payload.digit }
@@ -46,13 +49,12 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return plusesOverload
 
     case ZERO:
-      const verifiedState =
-        includes("+", displayed) && split("+", displayed)[1].startsWith("0")
-          ? state
-          : {
-              ...state,
-              displayed: displayed + "0"
-            }
+      const verifiedState = avoidMultiplyZeros
+        ? state
+        : {
+            ...state,
+            displayed: displayed + "0"
+          }
       const updatedState =
         displayed.length > MAX_INPUT_LENGTH ? tooMuch : verifiedState
       return updatedState

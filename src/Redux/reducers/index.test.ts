@@ -13,7 +13,7 @@ describe("mainReducer", (): void => {
       reducer(state, {
         type: actions.PROVIDE_INPUT,
         payload: {
-          digit: 2
+          digit: "2"
         }
       })
     ).toEqual({
@@ -32,7 +32,7 @@ describe("mainReducer", (): void => {
         {
           type: actions.PROVIDE_INPUT,
           payload: {
-            digit: 2
+            digit: "2"
           }
         }
       )

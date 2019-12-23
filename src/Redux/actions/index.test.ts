@@ -14,10 +14,10 @@ describe("actions", (): void => {
     const expectedAction = {
       type: actions.PROVIDE_INPUT,
       payload: {
-        digit: 2
+        digit: "2"
       }
     }
-    expect(actions.provideInput(2)).toEqual(expectedAction)
+    expect(actions.provideInput("2")).toEqual(expectedAction)
   })
 })
 
