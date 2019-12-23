@@ -11,7 +11,7 @@ interface GetResult {
 interface ProvideInput {
   type: "PROVIDE INPUT"
   payload: {
-    digit: number
+    digit: string
   }
 }
 
@@ -33,7 +33,7 @@ export const getResult = (): GetResult => ({
   type: GET_RESULT
 })
 
-export const provideInput = (digit: number): ProvideInput => ({
+export const provideInput = (digit: string): ProvideInput => ({
   type: PROVIDE_INPUT,
   payload: {
     digit

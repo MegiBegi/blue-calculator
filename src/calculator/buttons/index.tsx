@@ -16,10 +16,10 @@ export const buttonsList = names.map((name, index) => {
 })
 
 interface FullListProps {
-  onButtonClick: any
+  onButtonClick: (event: React.MouseEvent<HTMLElement>) => void
 }
 
-const FullList: FC<FullListProps> = ({ onButtonClick }) => {
+const Buttons: FC<FullListProps> = ({ onButtonClick }) => {
   const buttonsTab = buttonsList.map((button: ButtonType) => {
     return (
       <Button
@@ -36,4 +36,4 @@ const FullList: FC<FullListProps> = ({ onButtonClick }) => {
   return <>{buttonsTab}</>
 }
 
-export default FullList
+export default Buttons

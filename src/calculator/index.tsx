@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { connect } from "react-redux"
 import { includes, endsWith } from "ramda"
 import { noop } from "ramda-adjunct"
-import { getResult, provideInput, usedPlus, zero, reset } from "redux/actions"
+import * as actions from "redux/actions"
 import { RootState } from "redux/reducers"
 import Buttons from "calculator/buttons"
 import {
@@ -18,7 +18,6 @@ type Noop = () => void
 
 interface CalculatorStateProps {
   currentValue: string
-  checkingRenderOnPlus: number
   tooMuchText: boolean
 }
 
@@ -33,11 +32,11 @@ const Calculator: FC<CalculatorProps> = ({
   zero,
   reset
 }) => {
-  const handleClick = (event: any): void => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
+    // @ts-ignore
     const buttonName = event.target.name
     const includesPlus = includes("+", currentValue)
     const endsWithAPlus = endsWith("+", currentValue)
-
     switch (buttonName) {
       case "=":
         !tooMuchText && includesPlus && getResult()
@@ -82,24 +81,23 @@ const Calculator: FC<CalculatorProps> = ({
 
 const mapStateToProps = (state: RootState): CalculatorStateProps => ({
   currentValue: state.displayed,
-  checkingRenderOnPlus: state.plusCheck,
   tooMuchText: state.tooMuch
 })
 
 interface DispatchProps {
   getResult: Noop
-  provideInput: (digit: number) => void
+  provideInput: (digit: string) => void
   usedPlus: Noop
   zero: Noop
   reset: Noop
 }
 
 const mapDispatchToProps: DispatchProps = {
-  getResult: getResult,
-  provideInput: provideInput,
-  usedPlus: usedPlus,
-  zero: zero,
-  reset: reset
+  getResult: actions.getResult,
+  provideInput: actions.provideInput,
+  usedPlus: actions.usedPlus,
+  zero: actions.zero,
+  reset: actions.reset
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Calculator)
