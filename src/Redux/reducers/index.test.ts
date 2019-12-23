@@ -76,4 +76,21 @@ describe("mainReducer", (): void => {
       displayed: "9+"
     })
   })
+
+  it("checks USED_PLUS when state.displayed ends with '+'", (): void => {
+    expect(
+      reducer(
+        {
+          ...state,
+          displayed: "9+"
+        },
+        {
+          type: actions.USED_PLUS
+        }
+      )
+    ).toEqual({
+      ...state,
+      displayed: "9+"
+    })
+  })
 })
