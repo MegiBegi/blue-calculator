@@ -1,4 +1,4 @@
-import { includes, endsWith } from "ramda"
+import { endsWith, equals } from "ramda"
 import {
   Actions,
   GET_RESULT,
@@ -12,25 +12,28 @@ import { getSum } from "utils"
 export interface RootState {
   displayed: string
   tooMuch: boolean
-  plusCheck: number
 }
 
 export const initialState: RootState = {
   displayed: "",
-  tooMuch: false,
-  plusCheck: 0
+  tooMuch: false
 }
 
 const mainReducer = (state: RootState = initialState, action: Actions) => {
   const { displayed } = state
+  const tooMuch = {
+    ...state,
+    displayed: "Too much!!!",
+    tooMuch: true
+  }
   const MAX_INPUT_LENGTH = 11
   switch (action.type) {
     case PROVIDE_INPUT:
-      const currentInput = displayed
+      if (displayed === "0") return state
       const theFinalState =
-        currentInput.length < MAX_INPUT_LENGTH
+        displayed.length < MAX_INPUT_LENGTH
           ? { ...state, displayed: displayed + action.payload.digit }
-          : { ...state, displayed: "Too much!!!", tooMuch: true }
+          : tooMuch
 
       return theFinalState
 
@@ -46,16 +49,15 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return plusesOverload
 
     case ZERO:
-      const currentState = displayed
-      const verifiedState = includes(currentState, "0")
+      const verifiedState = equals("", displayed)
         ? state
         : {
             ...state,
-            displayed: displayed + "0",
-            zero: true
+            displayed: displayed + "0"
           }
-
-      return verifiedState
+      const updatedState =
+        displayed.length > MAX_INPUT_LENGTH ? tooMuch : verifiedState
+      return updatedState
 
     case GET_RESULT:
       const myState = displayed
