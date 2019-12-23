@@ -15,7 +15,7 @@ export interface RootState {
   plusCheck: number
 }
 
-const initialState: RootState = {
+export const initialState: RootState = {
   displayed: "",
   tooMuch: false,
   plusCheck: 0
