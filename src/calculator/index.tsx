@@ -48,7 +48,7 @@ const Calculator: FC<CalculatorProps> = ({
         break
 
       case "0":
-        !tooMuchText && zero()
+        !tooMuchText && currentValue !== "" && zero()
         break
 
       default:

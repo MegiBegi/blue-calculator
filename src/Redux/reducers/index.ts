@@ -1,4 +1,4 @@
-import { endsWith, equals } from "ramda"
+import { endsWith, split, includes } from "ramda"
 import {
   Actions,
   GET_RESULT,
@@ -38,36 +38,32 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return theFinalState
 
     case USED_PLUS:
-      const theCurrentState = displayed
       const properScenario = {
         ...state,
         displayed: displayed + "+"
       }
-      const plusesOverload = endsWith("+", theCurrentState)
-        ? state
-        : properScenario
+      const plusesOverload = endsWith("+", displayed) ? state : properScenario
       return plusesOverload
 
     case ZERO:
-      const verifiedState = equals("", displayed)
-        ? state
-        : {
-            ...state,
-            displayed: displayed + "0"
-          }
+      const verifiedState =
+        includes("+", displayed) && split("+", displayed)[1].startsWith("0")
+          ? state
+          : {
+              ...state,
+              displayed: displayed + "0"
+            }
       const updatedState =
         displayed.length > MAX_INPUT_LENGTH ? tooMuch : verifiedState
       return updatedState
 
     case GET_RESULT:
-      const myState = displayed
-      const addZero = myState + "0"
-      const digits = endsWith("+", myState) ? addZero : myState
+      const addZero = displayed + "0"
+      const digits = endsWith("+", displayed) ? addZero : displayed
       const result = getSum(digits).toString()
       return {
         ...state,
-        displayed: result,
-        plusCheck: 0
+        displayed: result
       }
     case RESET:
       return initialState
