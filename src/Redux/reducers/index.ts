@@ -1,4 +1,4 @@
-import { endsWith } from "ramda"
+import { endsWith, split, includes } from "ramda"
 import {
   Actions,
   GET_RESULT,
@@ -46,13 +46,15 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
       return plusesOverload
 
     case ZERO:
-      const updatedState =
-        displayed.length > MAX_INPUT_LENGTH
-          ? tooMuch
+      const verifiedState =
+        includes("+", displayed) && split("+", displayed)[1].startsWith("0")
+          ? state
           : {
               ...state,
               displayed: displayed + "0"
             }
+      const updatedState =
+        displayed.length > MAX_INPUT_LENGTH ? tooMuch : verifiedState
       return updatedState
 
     case GET_RESULT:
