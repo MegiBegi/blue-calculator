@@ -31,7 +31,6 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
   const MAX_INPUT_LENGTH = 11
   switch (action.type) {
     case PROVIDE_INPUT:
-      if (displayed === "0") return state
       if (avoidMultiplyZeros) return state
       const theFinalState =
         displayed.length < MAX_INPUT_LENGTH
@@ -56,7 +55,7 @@ const mainReducer = (state: RootState = initialState, action: Actions) => {
             displayed: displayed + "0"
           }
       const updatedState =
-        displayed.length > MAX_INPUT_LENGTH ? tooMuch : verifiedState
+        displayed.length >= MAX_INPUT_LENGTH ? tooMuch : verifiedState
       return updatedState
 
     case GET_RESULT:

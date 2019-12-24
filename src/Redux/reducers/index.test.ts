@@ -8,7 +8,27 @@ describe("mainReducer", (): void => {
     state = initialState
   })
 
-  it("checks PROVIDE_INPUT when currentInput.length < MAX_INPUT_LENGTH ", (): void => {
+  it("stops insertion when 0 is the first digit of a number ", (): void => {
+    expect(
+      reducer(
+        {
+          ...state,
+          displayed: "3+0"
+        },
+        {
+          type: actions.PROVIDE_INPUT,
+          payload: {
+            digit: "2"
+          }
+        }
+      )
+    ).toEqual({
+      ...state,
+      displayed: "3+0"
+    })
+  })
+
+  it("checks PROVIDE_INPUT when displayed.length < MAX_INPUT_LENGTH ", (): void => {
     expect(
       reducer(state, {
         type: actions.PROVIDE_INPUT,
@@ -22,7 +42,7 @@ describe("mainReducer", (): void => {
     })
   })
 
-  it("checks PROVIDE_INPUT when currentInput.length >= MAX_INPUT_LENGTH ", (): void => {
+  it("checks PROVIDE_INPUT when displayed.length >= MAX_INPUT_LENGTH ", (): void => {
     expect(
       reducer(
         {
@@ -60,7 +80,7 @@ describe("mainReducer", (): void => {
     })
   })
 
-  it("checks USED_PLUS when state.displayed ends with '+'", (): void => {
+  it("checks USED_PLUS when displayed ends with '+'", (): void => {
     expect(
       reducer(
         {
@@ -77,20 +97,55 @@ describe("mainReducer", (): void => {
     })
   })
 
-  it("checks USED_PLUS when state.displayed ends with '+'", (): void => {
+  it("checks ZERO when displayed.length >= MAX_INPUT_LENGTH ", (): void => {
     expect(
       reducer(
         {
           ...state,
-          displayed: "9+"
+          displayed: "99999999999"
         },
         {
-          type: actions.USED_PLUS
+          type: actions.ZERO
         }
       )
     ).toEqual({
       ...state,
-      displayed: "9+"
+      displayed: "Too much!!!",
+      tooMuch: true
+    })
+  })
+
+  it("checks ZERO when displayed.length < MAX_INPUT_LENGTH and avoid multiply zeros is false", (): void => {
+    expect(
+      reducer(
+        {
+          ...state,
+          displayed: "10+20"
+        },
+        {
+          type: actions.ZERO
+        }
+      )
+    ).toEqual({
+      ...state,
+      displayed: "10+200"
+    })
+  })
+
+  it("checks ZERO when displayed.length < MAX_INPUT_LENGTH and avoid multiply zeros is true", (): void => {
+    expect(
+      reducer(
+        {
+          ...state,
+          displayed: "10+0"
+        },
+        {
+          type: actions.ZERO
+        }
+      )
+    ).toEqual({
+      ...state,
+      displayed: "10+0"
     })
   })
 })
