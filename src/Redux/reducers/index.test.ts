@@ -4,10 +4,21 @@ import * as actions from "redux/actions"
 describe("mainReducer", (): void => {
   let state: RootState = initialState
 
+  const actionNoop = { type: "NOOP" }
+
   beforeEach((): void => {
     state = initialState
   })
 
+  it("has a default state", () => {
+    // @ts-ignore
+    expect(reducer(undefined, actionNoop)).toEqual(state)
+  })
+
+  it("returns the initial state", () => {
+    // @ts-ignore
+    expect(reducer(state, actionNoop)).toEqual(state)
+  })
   it("stops insertion when 0 is the first digit of a number ", (): void => {
     expect(
       reducer(
@@ -146,6 +157,56 @@ describe("mainReducer", (): void => {
     ).toEqual({
       ...state,
       displayed: "10+0"
+    })
+  })
+
+  it("checks GET_RESULT when displayed ends with a '+'", (): void => {
+    expect(
+      reducer(
+        {
+          ...state,
+          displayed: "10+9+"
+        },
+        {
+          type: actions.GET_RESULT
+        }
+      )
+    ).toEqual({
+      ...state,
+      displayed: "19"
+    })
+  })
+
+  it("checks GET_RESULT when displayed doesn't end with a '+'", (): void => {
+    expect(
+      reducer(
+        {
+          ...state,
+          displayed: "10+9"
+        },
+        {
+          type: actions.GET_RESULT
+        }
+      )
+    ).toEqual({
+      ...state,
+      displayed: "19"
+    })
+  })
+  it("fires RESET when reset button is clicked", (): void => {
+    expect(
+      reducer(
+        {
+          ...state,
+          displayed: "10+9"
+        },
+        {
+          type: actions.RESET
+        }
+      )
+    ).toEqual({
+      displayed: "",
+      tooMuch: false
     })
   })
 })
