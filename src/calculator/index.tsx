@@ -34,9 +34,9 @@ const Calculator: FC<CalculatorProps> = ({
 }) => {
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
     // @ts-ignore
-    const buttonName = event.target.name
-    const includesPlus = includes("+", currentValue)
-    const endsWithAPlus = endsWith("+", currentValue)
+    const buttonName: string = event.target.name
+    const includesPlus: boolean = includes("+", currentValue)
+    const endsWithAPlus: boolean = endsWith("+", currentValue)
     switch (buttonName) {
       case "=":
         !tooMuchText && includesPlus && getResult()
@@ -100,4 +100,7 @@ const mapDispatchToProps: DispatchProps = {
   reset: actions.reset
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Calculator)
+export default connect<CalculatorStateProps, DispatchProps, {}, RootState>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Calculator)
