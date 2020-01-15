@@ -8,30 +8,26 @@ interface ButtonType {
 
 const names = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "+", "0", "="]
 
-export const buttonsList = names.map((name, index) => {
-  return {
-    name,
-    id: index
-  }
-})
+export const buttonsList = names.map((name, index) => ({
+  name,
+  id: index
+}))
 
 interface FullListProps {
   onButtonClick: (event: React.MouseEvent<HTMLElement>) => void
 }
 
 const Buttons: FC<FullListProps> = ({ onButtonClick }) => {
-  const buttonsTab = buttonsList.map((button: ButtonType) => {
-    return (
-      <Button
-        name={button.name}
-        sign={button.id}
-        key={button.id}
-        onClick={onButtonClick}
-      >
-        {button.name}
-      </Button>
-    )
-  })
+  const buttonsTab = buttonsList.map((button: ButtonType) => (
+    <Button
+      name={button.name}
+      sign={button.id}
+      key={button.id}
+      onClick={onButtonClick}
+    >
+      {button.name}
+    </Button>
+  ))
 
   return <>{buttonsTab}</>
 }
