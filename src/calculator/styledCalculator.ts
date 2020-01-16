@@ -22,6 +22,7 @@ export const StyledCalculator = styled.div`
   padding: 0;
   position: relative;
 `
+
 export const ScoreInputWrapper = styled.div`
   width: 300px;
   height: auto;
@@ -53,6 +54,7 @@ export const ButtonsWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
 `
+
 export const ResetButton = styled.button`
   font-size: 20px;
   color: #ffffff;

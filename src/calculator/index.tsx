@@ -16,12 +16,20 @@ import {
 
 type Noop = () => void
 
+type CalculatorProps = CalculatorStateProps & DispatchProps
+
 interface CalculatorStateProps {
   currentValue: string
   tooMuchText: boolean
 }
 
-type CalculatorProps = CalculatorStateProps & DispatchProps
+interface DispatchProps {
+  getResult: Noop
+  provideInput: (digit: string) => void
+  usedPlus: Noop
+  zero: Noop
+  reset: Noop
+}
 
 const Calculator: FC<CalculatorProps> = ({
   currentValue,
@@ -83,14 +91,6 @@ const mapStateToProps = (state: RootState): CalculatorStateProps => ({
   currentValue: state.displayed,
   tooMuchText: state.tooMuch
 })
-
-interface DispatchProps {
-  getResult: Noop
-  provideInput: (digit: string) => void
-  usedPlus: Noop
-  zero: Noop
-  reset: Noop
-}
 
 const mapDispatchToProps: DispatchProps = {
   getResult: actions.getResult,

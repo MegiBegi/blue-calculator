@@ -17,19 +17,19 @@ interface FullListProps {
   onButtonClick: (event: React.MouseEvent<HTMLElement>) => void
 }
 
-const Buttons: FC<FullListProps> = ({ onButtonClick }) => {
-  const buttonsTab = buttonsList.map((button: ButtonType) => (
-    <Button
-      name={button.name}
-      sign={button.id}
-      key={button.id}
-      onClick={onButtonClick}
-    >
-      {button.name}
-    </Button>
-  ))
-
-  return <>{buttonsTab}</>
-}
+const Buttons: FC<FullListProps> = ({ onButtonClick }) => (
+  <>
+    {buttonsList.map((button: ButtonType) => (
+      <Button
+        name={button.name}
+        sign={button.id}
+        key={button.id}
+        onClick={onButtonClick}
+      >
+        {button.name}
+      </Button>
+    ))}
+  </>
+)
 
 export default Buttons
